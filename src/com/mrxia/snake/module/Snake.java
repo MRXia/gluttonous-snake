@@ -92,4 +92,8 @@ public class Snake {
 
         return step(isFeed);
     }
+
+    public boolean contains(int x, int y) {
+        return points.contains(new Point(x, y));
+    }
 }
