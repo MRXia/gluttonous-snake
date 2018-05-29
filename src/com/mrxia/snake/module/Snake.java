@@ -97,8 +97,8 @@ public class Snake {
         return points.contains(new Point(x, y));
     }
 
-    public boolean contains(Point point) {
-        return points.contains(point);
+    public boolean isBody(Point point) {
+        return points.contains(point) && !getHead().equals(point);
     }
 
     /**

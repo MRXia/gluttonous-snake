@@ -108,6 +108,6 @@ public class Panel {
         }
 
         //判断是否撞本身
-        return snake.contains(head);
+        return snake.isBody(head);
     }
 }
