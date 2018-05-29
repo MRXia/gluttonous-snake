@@ -15,7 +15,7 @@ public class Snake {
      */
     public enum Direction {
 
-        UP(-10), DOWN(10), LEFT(-1), FIGHT(1);
+        UP(-10), DOWN(10), LEFT(-1), RIGHT(1);
 
         private int value;
 
@@ -64,10 +64,10 @@ public class Snake {
      */
     public boolean step(Predicate<Point> isFeed) {
 
-        Point head = points.getFirst();
+        Point head = getHead();
 
-        int x = head.getX() + direction.getValue() / 10;
-        int y = head.getY() + direction.getValue() % 10;
+        int x = head.getX() + direction.getValue() % 10;
+        int y = head.getY() + direction.getValue() / 10;
 
         head = new Point(x, y);
         points.addFirst(head);
@@ -95,5 +95,17 @@ public class Snake {
 
     public boolean contains(int x, int y) {
         return points.contains(new Point(x, y));
+    }
+
+    public boolean contains(Point point) {
+        return points.contains(point);
+    }
+
+    /**
+     * 获取头部
+     * @return
+     */
+    public Point getHead() {
+        return points.getFirst();
     }
 }

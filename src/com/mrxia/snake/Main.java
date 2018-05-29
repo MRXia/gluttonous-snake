@@ -1,8 +1,11 @@
 package com.mrxia.snake;
 
+import com.mrxia.snake.module.Console;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Console console = new Console();
+        console.start();
     }
 }

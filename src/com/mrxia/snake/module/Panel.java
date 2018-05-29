@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * 游戏面板类
+ *
  * @author xiazijian
  */
 public class Panel {
@@ -42,7 +43,7 @@ public class Panel {
      */
     public void increaseFoods(int num) {
 
-        for (;;) {
+        for (; ; ) {
             int x = random.nextInt(cols - 2) + 1;
             int y = random.nextInt(rows - 2) + 1;
 
@@ -69,9 +70,9 @@ public class Panel {
                     System.out.print("-");
                 } else if (j == 0 || j == cols - 1) {
                     System.out.print("|");
-                } else if (snake.contains(i, j)) {
+                } else if (snake.contains(j, i)) {
                     System.out.print("#");
-                } else if (foods.contains(new Point(i, j))) {
+                } else if (foods.contains(new Point(j, i))) {
                     System.out.print("@");
                 } else {
                     System.out.print(" ");
@@ -79,5 +80,34 @@ public class Panel {
             }
             System.out.println();
         }
+    }
+
+    public boolean step() {
+        return snake.step(this::isEat);
+    }
+
+    public boolean step(Snake.Direction direction) {
+        return snake.step(direction, this::isEat);
+    }
+
+    private boolean isEat(Point point) {
+        return foods.contains(point);
+    }
+
+    /**
+     * 蛇是否死亡
+     * @return 如果死亡，则为true
+     */
+    public boolean isDead() {
+
+        Point head = snake.getHead();
+        //判断是否撞墙
+        if (head.getX() == 0 || head.getX() == (cols - 1)
+                || head.getY() == 0 || head.getY() == (rows - 1)) {
+            return true;
+        }
+
+        //判断是否撞本身
+        return snake.contains(head);
     }
 }

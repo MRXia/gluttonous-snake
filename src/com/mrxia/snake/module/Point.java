@@ -2,6 +2,7 @@ package com.mrxia.snake.module;
 
 /**
  * 坐标点类
+ *
  * @author xiazijian
  */
 public class Point {
