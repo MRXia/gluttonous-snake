@@ -21,10 +21,6 @@ public class Panel {
 
     private Random random;
 
-    public Panel() {
-        init();
-    }
-
     public Panel(int rows, int cols) {
         this.cols = cols;
         this.rows = rows;
@@ -75,9 +71,13 @@ public class Panel {
                 } else if (j == 0 || j == cols - 1) {
                     System.out.print("|");
                 } else if (snake.contains(j, i)) {
-                    System.out.print("#");
+                    if (snake.getHead().equals(new Point(j, i))) {
+                        System.out.print("@");
+                    } else {
+                        System.out.print("#");
+                    }
                 } else if (foods.contains(new Point(j, i))) {
-                    System.out.print("@");
+                    System.out.print("o");
                 } else {
                     System.out.print(" ");
                 }
@@ -86,12 +86,19 @@ public class Panel {
         }
     }
 
-    public boolean step() {
-        return snake.step(this::isEat);
-    }
-
     public boolean step(Snake.Direction direction) {
-        return snake.step(direction, this::isEat);
+
+        boolean eat;
+        if (direction == null) {
+            eat = snake.step(this::isEat);
+        } else {
+            eat = snake.step(direction, this::isEat);
+        }
+
+        if (eat) {
+            foods.remove(snake.getHead());
+        }
+        return eat;
     }
 
     private boolean isEat(Point point) {

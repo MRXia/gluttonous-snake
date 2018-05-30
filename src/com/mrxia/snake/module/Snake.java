@@ -85,10 +85,9 @@ public class Snake {
     public boolean step(Direction direction, Predicate<Point> isFeed) {
 
         // 如果是反向，则不移动
-        if (this.direction.isReverse(direction)) {
-            return false;
+        if (!this.direction.isReverse(direction)) {
+            this.direction = direction;
         }
-        this.direction = direction;
 
         return step(isFeed);
     }

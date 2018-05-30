@@ -36,7 +36,6 @@ public class Console {
 
     public void start() {
 
-        Snake.Direction direction;
         panel.increaseFoods(6);
         for(;;){
 
@@ -45,12 +44,7 @@ public class Console {
 
             //获取控制按钮，判断并返回操作结果
             char ch = control();
-            boolean eat;
-            if((direction = keyMap.get(ch)) != null){
-                eat = panel.step(direction);
-            } else {
-                eat = panel.step();
-            }
+            boolean eat = panel.step(keyMap.get(ch));
 
             if ( panel.isDead()) {
                 System.out.println("游戏结束");
