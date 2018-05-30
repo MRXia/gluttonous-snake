@@ -43,6 +43,7 @@ public class Panel {
      */
     public void increaseFoods(int num) {
 
+        int increase = 0;
         for (; ; ) {
             int x = random.nextInt(cols - 2) + 1;
             int y = random.nextInt(rows - 2) + 1;
@@ -51,9 +52,12 @@ public class Panel {
             if (snake.contains(x, y)) {
                 continue;
             }
-            foods.add(new Point(x, y));
 
-            if (foods.size() == num) {
+            if (foods.add(new Point(x, y))) {
+                increase++;
+            }
+
+            if (increase == num) {
                 break;
             }
         }
